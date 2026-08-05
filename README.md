@@ -1,6 +1,6 @@
 [![Jacquemont's Lab Header](img/labheader.png)](https://www.jacquemont-lab.org/)
 
-[Git Repository CNV-Annotation](https://github.com/JacquemontLab/SAREK-CNV-ShortVariants.git)
+[Git Repository SAREK-CNV-ShortVariants](https://github.com/JacquemontLab/SAREK-CNV-ShortVariants.git)
 
 # SAREK-CNV-ShortVariants
 
