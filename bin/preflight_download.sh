@@ -25,10 +25,10 @@
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# Resolve env.sh at repo root, or fall back to bin/ (in case of layout drift).
-if   [[ -f "${HERE}/env.sh" ]];     then ENV_FILE="${HERE}/env.sh"
+# Resolve env.sh at repo root, or fall back to setup/ (current layout).
+if   [[ -f "${HERE}/env.sh" ]];       then ENV_FILE="${HERE}/env.sh"
 elif [[ -f "${HERE}/setup/env.sh" ]]; then ENV_FILE="${HERE}/setup/env.sh"
-else echo "ERROR: env.sh not found under ${HERE} (or ${HERE}/bin). Copy env.sh to the repo root." >&2; exit 1
+else echo "ERROR: env.sh not found under ${HERE} (or ${HERE}/setup). Put env.sh in setup/." >&2; exit 1
 fi
 # shellcheck source=/dev/null
 source "$ENV_FILE"
@@ -41,11 +41,12 @@ SAMPLESHEET="${1:?Usage: preflight_download.sh <SAMPLESHEET_CSV> [--real]}"
 STUB_FLAG="-stub-run"
 [[ "${2:-}" == "--real" ]] && STUB_FLAG=""
 
-mkdir -p "$NXF_SINGULARITY_CACHEDIR"
+mkdir -p "$NXF_SINGULARITY_CACHEDIR" "$APPTAINER_TMPDIR"
 
 echo "=============================================="
 echo " PRE-FLIGHT (online, login node) — caching containers"
 echo "   cache dir : $NXF_SINGULARITY_CACHEDIR"
+echo "   build tmp : $APPTAINER_TMPDIR"
 echo "   sarek     : $SAREK_DIR"
 echo "   tools     : $SAREK_TOOLS"
 echo "   ulimit -u : $(ulimit -u)"
@@ -81,6 +82,19 @@ export NXF_SINGULARITY_CACHEDIR
 #    stub run (stubs are trivial, so serial is fine and keeps thread count low).
 PREFLIGHT_CFG="$(mktemp "${TMPDIR:-/tmp}/preflight_XXXX.config")"
 cat > "$PREFLIGHT_CFG" <<'CFG'
+process {
+    maxForks = 1
+    // Stub tasks do trivial `touch`/no-op work, so the resource *requests*
+    // Sarek's base.config computes per label (e.g. process_medium = 36.GB)
+    // are fiction here. Cap them well under a typical login node's real
+    // memory so Nextflow's local-executor preflight check doesn't reject
+    // a task for "exceeding available memory" before it ever runs.
+    resourceLimits = [
+        cpus:   4,
+        memory: '8.GB',
+        time:   '2.h'
+    ]
+}
 executor {
     name        = 'local'
     queueSize   = 2

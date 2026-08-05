@@ -31,9 +31,10 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Resolve env.sh: setup/ (current layout), or repo root, or bin/ (legacy).
-if   [[ -f "${HERE}/setup/env.sh" ]]; then ENV_FILE="${HERE}/setup/env.sh"
-else echo "ERROR: env.sh not found under ${HERE}/setup, ${HERE}, or ${HERE}/bin. Put env.sh in setup/." >&2; exit 1
+# Resolve env.sh at repo root, or fall back to setup/ (current layout).
+if   [[ -f "${HERE}/env.sh" ]];       then ENV_FILE="${HERE}/env.sh"
+elif [[ -f "${HERE}/setup/env.sh" ]]; then ENV_FILE="${HERE}/setup/env.sh"
+else echo "ERROR: env.sh not found under ${HERE} (or ${HERE}/setup). Put env.sh in setup/." >&2; exit 1
 fi
 # shellcheck source=/dev/null
 source "$ENV_FILE"
@@ -68,7 +69,7 @@ echo "   igenomes -> dir  : $IGENOMES_DEST"
 echo "   phases          : containers=$DO_CONTAINERS refs=$DO_REFS (force_refs=$FORCE_REFS)"
 echo "=============================================="
 
-mkdir -p "$NXF_SINGULARITY_CACHEDIR" "$IGENOMES_DEST"
+mkdir -p "$NXF_SINGULARITY_CACHEDIR" "$IGENOMES_DEST" "$APPTAINER_TMPDIR"
 
 # ---------------------------------------------------------------------------
 # Login-node safety: apptainer's Go image-builder defaults GOMAXPROCS to the
@@ -199,10 +200,16 @@ echo "=============================================="
 # ---------------------------------------------------------------------------
 echo "[3/3] Finalizing offline installation..."
 
-"${HERE}/bin/prepare_samplesheet.sh" tests/ sample_cram.csv --type cram
-"${HERE}/bin/prepare_samplesheet.sh" tests/ sample_bam.csv  --type bam
+if [[ "$DO_CONTAINERS" -eq 1 && "$DO_REFS" -eq 1 ]]; then
+    "${HERE}/bin/prepare_samplesheet.sh" "${HERE}/tests/" "${HERE}/sample_cram.csv" --type cram
+    "${HERE}/bin/prepare_samplesheet.sh" "${HERE}/tests/" "${HERE}/sample_bam.csv"  --type bam
 
-"${HERE}/bin/preflight_download.sh" sample_cram.csv
-"${HERE}/bin/preflight_download.sh" sample_bam.csv
+    "${HERE}/bin/preflight_download.sh" "${HERE}/sample_cram.csv"
+    "${HERE}/bin/preflight_download.sh" "${HERE}/sample_bam.csv"
 
-rm sample_bam.csv sample_cram.csv
+    rm "${HERE}/sample_bam.csv" "${HERE}/sample_cram.csv"
+else
+    echo "  skipped (needs both pipeline+containers and references present;" \
+         "re-run ./INSTALL.sh with no flags once both phases have completed," \
+         "or run bin/preflight_download.sh manually)"
+fi

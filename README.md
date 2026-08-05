@@ -1,0 +1,179 @@
+# SAREK-CNV-ShortVariants
+
+Offline germline **short-variant** (SNV/indel) and **CNV/SV** calling from
+pre-aligned CRAM/BAM files, built on [nf-core/sarek](https://nf-co.re/sarek)
+`3.8.1` and run via Apptainer/Singularity on a Slurm cluster whose **compute
+nodes have no internet access**.
+
+Everything the pipeline needs — pipeline code, container images, reference
+genome — is downloaded once on a login node. Compute nodes then run
+`nextflow ... -offline` and never touch the network again.
+
+```
+  LOGIN NODE (online, once)                COMPUTE NODE (offline, per run)
+ ┌───────────────────────────┐            ┌───────────────────────────┐
+ │ INSTALL.sh                │            │ sbatch submit_slurm.sh    │
+ │  ├─ pipeline + containers │  shared    │  └─ nextflow -offline     │
+ │  └─ GATK.GRCh38 iGenomes  │  storage   │       --step variant_     │
+ │ bin/preflight_download.sh │───────────▶│       calling             │
+ │  └─ prime container cache │  (cache,   │     → SNV/indel, SV, CNV  │
+ │     via -stub-run         │   refs)    │       calls               │
+ └───────────────────────────┘            └───────────────────────────┘
+   needs internet access                    never touches the network
+```
+
+## Contents
+
+- [Prerequisites](#prerequisites)
+- [Quick start](#quick-start)
+- [Repo layout](#repo-layout)
+- [Configuration you should adjust](#configuration-you-should-adjust)
+- [Choosing your callers (`SAREK_TOOLS`)](#choosing-your-callers-sarek_tools)
+- [The benchmark (`doc/benchmark_sv_callers.pdf`)](#the-benchmark-docbenchmark_sv_callerspdf)
+- [Offline mechanics, in short](#offline-mechanics-in-short)
+
+## Prerequisites
+
+On the **login node** (needs internet, used only by `INSTALL.sh` /
+`bin/preflight_download.sh`):
+
+| Tool | Used for | If missing |
+|---|---|---|
+| `nf-core` CLI | Downloading the pipeline + containers | `INSTALL.sh` installs it via `pip install --user nf-core` automatically |
+| `apptainer` (or `singularity`) | Pulling/running containers | `module load apptainer`, or install it |
+| `aws` CLI | Syncing the iGenomes reference bundle (public bucket, no credentials needed) | `INSTALL.sh` prints the exact `aws s3 sync` command to run manually |
+| `samtools` | Indexing BAM/CRAM in `bin/prepare_samplesheet.sh` | `module load samtools` |
+| `jq` | Only needed if you hit the Docker credential-helper issue below | any package manager |
+
+On the **compute node** (offline, used by `bin/submit_slurm.sh`): just
+`apptainer` and your pinned `nextflow` binary — both already resolved via
+`setup/env.sh`.
+
+## Quick start
+
+1. **Edit `setup/env.sh` once** for your cluster — see
+   [Configuration you should adjust](#configuration-you-should-adjust).
+2. **Install** (run on a login node, with internet):
+   ```bash
+   ./INSTALL.sh
+   ```
+   Downloads the pipeline + all containers into `NXF_SINGULARITY_CACHEDIR`,
+   syncs the `GATK.GRCh38` iGenomes reference bundle, then primes the cache
+   further with a stub pass over the bundled chr22 test sample. Flags:
+   `--containers-only`, `--refs-only`, `--force-refs` (re-sync refs even if
+   already present).
+3. **Build a samplesheet** from your own aligned BAM/CRAM files:
+   ```bash
+   bin/prepare_samplesheet.sh /path/to/alignments my_samples.csv
+   ```
+   Auto-detects CRAM vs BAM per sample (prefers CRAM), indexes files missing
+   a `.crai`/`.bai`, and writes a `--step variant_calling`-ready CSV. Use
+   `--type cram|bam` to force one type, `--split` if a directory mixes both
+   and you want two sheets. See the script header for the full option list.
+4. **(Recommended) refresh the container cache** if you changed
+   `SAREK_TOOLS` or `GENOME` after step 2 — compute nodes are offline and
+   can't pull anything at run time:
+   ```bash
+   bin/preflight_download.sh my_samples.csv
+   ```
+5. **Submit the real job:**
+   ```bash
+   sbatch bin/submit_slurm.sh my_samples.csv /path/to/output_dir
+   ```
+
+## Repo layout
+
+| Path | What it is |
+|---|---|
+| `INSTALL.sh` | One-time, **online**, login-node installer: pipeline + containers + reference genome. |
+| `setup/env.sh` | Single source of truth for paths/tools. **Edit this first.** |
+| `setup/sarek.config` | Nextflow process-resource overrides (per-caller CPU counts). |
+| `bin/prepare_samplesheet.sh` | Builds a Sarek-ready samplesheet from a directory of BAM/CRAM files. |
+| `bin/preflight_download.sh` | **Online**, login-node step: caches every container image via a `-stub-run`. |
+| `bin/submit_slurm.sh` | The actual `sbatch` job: **offline** variant/CNV/SV calling. |
+| `sample.csv` | Example samplesheet (chr22 test sample). Paths inside are cluster-specific — regenerate your own with `bin/prepare_samplesheet.sh` rather than reusing this file as-is. |
+| `tests/` | Small chr22 BAM+CRAM pair used to prime the container cache during install. |
+| `doc/benchmark_sv_callers.pdf` | CPU-scaling benchmark used to size the per-caller `cpus` in `setup/sarek.config` (see below). |
+| `sarek-3.8.1-offline/`, `sarek-resource-offline/` | Generated by `INSTALL.sh` (pipeline code + containers, and reference genome + Apptainer build scratch). Gitignored — do not commit. |
+
+## Configuration you should adjust
+
+- **`setup/env.sh`** — cluster-specific, not portable as-is:
+  - `NEXTFLOW_BIN` — path to your pinned Nextflow binary.
+  - `SAREK_DIR`, `IGENOMES_BASE`, `NXF_SINGULARITY_CACHEDIR`, `APPTAINER_TMPDIR`
+    — should all point at shared storage every compute node can see, with
+    plenty of free space. `INSTALL.sh` prints the exact values to put here
+    once it finishes.
+  - `SAREK_TOOLS` — the callers to run, see below.
+- **`bin/submit_slurm.sh` SBATCH header** — `--account`, `--time`,
+  `--cpus-per-task`, `--mem-per-cpu` are specific to one cluster allocation.
+  Change them for yours. The script derives a `process.resourceLimits` +
+  `executor` Nextflow config on the fly from what Slurm actually allocates to
+  the job (`$SLURM_CPUS_PER_TASK`, `$SLURM_MEM_PER_CPU`/`$SLURM_MEM_PER_NODE`),
+  so per-process resource requests never exceed that allocation — no need to
+  hardcode those.
+- **`setup/sarek.config`** — per-process `cpus` overrides. Tune these to your
+  own hardware/queue rather than trusting the defaults blindly (see the
+  benchmark below for why they're set the way they are). Note this Sarek
+  version has no `--max_cpus`/`--max_memory` pipeline params — resource caps
+  go through Nextflow's native `process.resourceLimits` directive instead
+  (see `sarek-3.8.1-offline/3_8_1/conf/test.config` for the same pattern),
+  which is what both `bin/submit_slurm.sh` and `bin/preflight_download.sh` use.
+
+## Choosing your callers (`SAREK_TOOLS`)
+
+The default in `setup/env.sh` covers all three categories Sarek supports for
+germline calling:
+
+| Category | Tools in the default set | Notes |
+|---|---|---|
+| Short variants (SNV/indel) | `strelka`, `haplotypecaller`, `deepvariant` | Strelka runs in single-sample germline mode (`STRELKA_SINGLE`). |
+| Structural variants | `manta`, `tiddit`, `indexcov` | |
+| Copy-number | `cnvkit` | |
+
+Add or remove tools by editing `SAREK_TOOLS` in `setup/env.sh`
+(comma-separated, no spaces). The full list Sarek 3.8.1 supports for germline
+calling is in `sarek-3.8.1-offline/3_8_1/nextflow_schema.json` (search for
+`"tools"`) or the [nf-core/sarek docs](https://nf-co.re/sarek/3.8.1/docs/usage).
+
+> **Whenever you add a tool, re-run `bin/preflight_download.sh`** before the
+> next `sbatch` — its container has to be cached while you still have
+> internet.
+
+## The benchmark (`doc/benchmark_sv_callers.pdf`)
+
+Despite the filename, this is a **CPU-scaling benchmark of the three
+short-variant callers** (DeepVariant, GATK HaplotypeCaller, Strelka) on GTEx
+samples run per-chromosome through Sarek — not the SV callers. It's the
+justification for the `cpus` values in `setup/sarek.config`:
+
+| Caller | Scaling behavior | Why it's capped at `cpus = 1` in `sarek.config` |
+|---|---|---|
+| Strelka | Scales well, finishes in minutes even at low CPU counts | Cheapest run this way — parallelize across samples instead |
+| GATK HaplotypeCaller | Plateaus hard past ~8 CPUs (efficiency drops toward single digits by 64 CPUs) | Extra cores per job are mostly wasted |
+| DeepVariant | Scales best of the three, but uses noticeably more memory per job (up to ~15 GB RSS at 16 CPUs) | Budget memory accordingly if you raise its CPU cap |
+
+If you change hardware, sample size, or which callers you run, re-benchmark
+rather than assuming these caps still hold.
+
+## Offline mechanics, in short
+
+- `INSTALL.sh` and `bin/preflight_download.sh` run **online**, on a login
+  node, and only ever touch the network to download/pull things once.
+- `bin/submit_slurm.sh` runs **offline** (`-offline`, `NXF_OFFLINE=true`) on
+  compute nodes, reusing what was cached — no network required or permitted.
+- `INSTALL.sh` and `bin/preflight_download.sh` both throttle themselves
+  (`GOMAXPROCS`, JVM heap, near-serial Nextflow executor) so the
+  pipeline/container download survives typical login-node process/thread
+  limits — shared login nodes cap how many threads one user can spawn, and
+  an unthrottled Nextflow JVM + Apptainer easily blow past that. That
+  throttling does **not** apply to `bin/submit_slurm.sh`: it runs on a
+  Slurm-allocated compute node with no such shared cap, and it uses the
+  CPUs/memory actually allocated by Slurm to do the real calling.
+
+---
+
+Pipeline: [nf-core/sarek](https://nf-co.re/sarek) `3.8.1`. If this analysis
+feeds a publication, cite Sarek itself — see
+`sarek-3.8.1-offline/3_8_1/CITATIONS.md` (present once `INSTALL.sh` has run)
+for the full list of tools and papers to acknowledge.
