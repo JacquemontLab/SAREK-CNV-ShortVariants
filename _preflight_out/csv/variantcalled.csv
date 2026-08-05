@@ -1,3 +1,0 @@
-patient,sample,variantcaller,vcf
-test_sample.chr22,test_sample.chr22,strelka,/home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/_preflight_out/variant_calling/strelka/test_sample.chr22/test_sample.chr22.strelka.variants.vcf.gz
-test_sample.chr22,test_sample.chr22,tiddit,/home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/_preflight_out/variant_calling/tiddit/test_sample.chr22/test_sample.chr22.tiddit.vcf.gz
