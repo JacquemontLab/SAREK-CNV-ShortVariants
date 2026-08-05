@@ -1,3 +1,7 @@
+[![Jacquemont's Lab Header](img/labheader.png)](https://www.jacquemont-lab.org/)
+
+[Git Repository CNV-Annotation](https://github.com/JacquemontLab/SAREK-CNV-ShortVariants.git)
+
 # SAREK-CNV-ShortVariants
 
 Offline germline **short-variant** (SNV/indel) and **CNV/SV** calling from
