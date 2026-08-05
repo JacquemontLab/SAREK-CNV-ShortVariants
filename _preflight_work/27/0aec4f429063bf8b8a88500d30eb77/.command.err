@@ -1,0 +1,234 @@
+/home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/_preflight_work/27/0aec4f429063bf8b8a88500d30eb77/.command.run: fork: retry: Resource temporarily unavailable
+runtime/cgo: pthread_create failed: Resource temporarily unavailable
+SIGSEGV: segmentation violation
+PC=0x7fa0557d254f m=2 sigcode=128
+
+goroutine 0 [idle]:
+runtime: g 0: unknown pc 0x7fa0557d254f
+stack: frame={sp:0x7fa00ea09920, fp:0x0} stack=[0x7fa00e20a260,0x7fa00ea09e60)
+0x00007fa00ea09820:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09830:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09840:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09850:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09860:  0x0000000000000000  0x00007fa0557ff559 
+0x00007fa00ea09870:  0x00007fa00ea09987  0x00007fa05597c6a0 
+0x00007fa00ea09880:  0x00007fa00ea098e0  0x00005634f91db10a 
+0x00007fa00ea09890:  0x00007fa00ea099e8  0x00007fa0557ff610 
+0x00007fa00ea098a0:  0x00007fa05597c6a0  0x00007fa05580905e 
+0x00007fa00ea098b0:  0x00005634f91db0fc  0x000000370000000d 
+0x00007fa00ea098c0:  0x00007fa0557fe510  0x00007fa05583679e 
+0x00007fa00ea098d0:  0x0000000000000000  0xd88c733590548600 
+0x00007fa00ea098e0:  0x0000000000000006  0x00007fa00ea0a6c0 
+0x00007fa00ea098f0:  0x00007fa00ea09ba0  0x0000000000000000 
+0x00007fa00ea09900:  0x000000c0000069c0  0x00007fa0557e86f2 
+0x00007fa00ea09910:  0x00007fa05597ce90  0x00007fa0557d253c 
+0x00007fa00ea09920: <0x0000000000000000  0xffffffffffffffff 
+0x00007fa00ea09930:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09940:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09950:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09960:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09970:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09980:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09990:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea099a0:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea099b0:  0x0000000000000000  0xd88c733590548600 
+0x00007fa00ea099c0:  0x00007fa05597c860  0x00007fa05597c860 
+0x00007fa00ea099d0:  0x00005634f91db10a  0x00005634f90bfade 
+0x00007fa00ea099e0:  0x0000000000000000  0x0000003000000010 
+0x00007fa00ea099f0:  0x00007fa00ea09ad0  0x00007fa00ea09a00 
+0x00007fa00ea09a00:  0x00007fa05593f5dd  0x00007fa055943a60 
+0x00007fa00ea09a10:  0xffffffffffffffff  0xffffffffffffff90 
+runtime: g 0: unknown pc 0x7fa0557d254f
+stack: frame={sp:0x7fa00ea09920, fp:0x0} stack=[0x7fa00e20a260,0x7fa00ea09e60)
+0x00007fa00ea09820:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09830:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09840:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09850:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09860:  0x0000000000000000  0x00007fa0557ff559 
+0x00007fa00ea09870:  0x00007fa00ea09987  0x00007fa05597c6a0 
+0x00007fa00ea09880:  0x00007fa00ea098e0  0x00005634f91db10a 
+0x00007fa00ea09890:  0x00007fa00ea099e8  0x00007fa0557ff610 
+0x00007fa00ea098a0:  0x00007fa05597c6a0  0x00007fa05580905e 
+0x00007fa00ea098b0:  0x00005634f91db0fc  0x000000370000000d 
+0x00007fa00ea098c0:  0x00007fa0557fe510  0x00007fa05583679e 
+0x00007fa00ea098d0:  0x0000000000000000  0xd88c733590548600 
+0x00007fa00ea098e0:  0x0000000000000006  0x00007fa00ea0a6c0 
+0x00007fa00ea098f0:  0x00007fa00ea09ba0  0x0000000000000000 
+0x00007fa00ea09900:  0x000000c0000069c0  0x00007fa0557e86f2 
+0x00007fa00ea09910:  0x00007fa05597ce90  0x00007fa0557d253c 
+0x00007fa00ea09920: <0x0000000000000000  0xffffffffffffffff 
+0x00007fa00ea09930:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09940:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09950:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09960:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09970:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09980:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea09990:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea099a0:  0x0000000000000000  0x0000000000000000 
+0x00007fa00ea099b0:  0x0000000000000000  0xd88c733590548600 
+0x00007fa00ea099c0:  0x00007fa05597c860  0x00007fa05597c860 
+0x00007fa00ea099d0:  0x00005634f91db10a  0x00005634f90bfade 
+0x00007fa00ea099e0:  0x0000000000000000  0x0000003000000010 
+0x00007fa00ea099f0:  0x00007fa00ea09ad0  0x00007fa00ea09a00 
+0x00007fa00ea09a00:  0x00007fa05593f5dd  0x00007fa055943a60 
+0x00007fa00ea09a10:  0xffffffffffffffff  0xffffffffffffff90 
+
+goroutine 1 [select, locked to thread]:
+runtime.gopark(0xc00045fd78?, 0x2?, 0x0?, 0x0?, 0xc00045fc7c?)
+	runtime/proc.go:398 +0xce fp=0xc00061fa70 sp=0xc00061fa50 pc=0x5634f8ab7d8e
+runtime.selectgo(0xc00061fd78, 0xc00045fc78, 0xc00058e560?, 0x0, 0x12?, 0x1)
+	runtime/select.go:327 +0x725 fp=0xc00061fb90 sp=0xc00061fa70 pc=0x5634f8ac7f45
+github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer.(*EngineOperations).StartProcess(0xc0003b1120, 0x5634f90cebed?)
+	github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer/process_linux.go:260 +0xae6 fp=0xc00061fe48 sp=0xc00061fb90 pc=0x5634f90a3b46
+github.com/apptainer/apptainer/internal/app/starter.StageTwo(0xc00045ff00?, 0xc000012060)
+	github.com/apptainer/apptainer/internal/app/starter/stage_linux.go:55 +0x57 fp=0xc00061fec8 sp=0xc00061fe48 pc=0x5634f8dca737
+main.startup.func1()
+	./main_linux.go:73 +0x25 fp=0xc00061fee8 sp=0xc00061fec8 pc=0x5634f90bf105
+main.startup.Execute.func3()
+	github.com/apptainer/apptainer/internal/pkg/util/mainthread/mainthread.go:25 +0x23 fp=0xc00061ff10 sp=0xc00061fee8 pc=0x5634f90bf0a3
+main.main()
+	./main_linux.go:115 +0x44 fp=0xc00061ff40 sp=0xc00061ff10 pc=0x5634f90bf224
+runtime.main()
+	runtime/proc.go:267 +0x2d2 fp=0xc00061ffe0 sp=0xc00061ff40 pc=0x5634f8ab7932
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc00061ffe8 sp=0xc00061ffe0 pc=0x5634f8ae8da1
+
+goroutine 2 [force gc (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:398 +0xce fp=0xc0001f6fa8 sp=0xc0001f6f88 pc=0x5634f8ab7d8e
+runtime.goparkunlock(...)
+	runtime/proc.go:404
+runtime.forcegchelper()
+	runtime/proc.go:322 +0xb8 fp=0xc0001f6fe0 sp=0xc0001f6fa8 pc=0x5634f8ab7c18
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f6fe8 sp=0xc0001f6fe0 pc=0x5634f8ae8da1
+created by runtime.init.6 in goroutine 1
+	runtime/proc.go:310 +0x1a
+
+goroutine 3 [runnable]:
+runtime.goschedIfBusy()
+	runtime/proc.go:361 +0x28 fp=0xc0001f7778 sp=0xc0001f7760 pc=0x5634f8ab7ca8
+runtime.bgsweep(0x0?)
+	runtime/mgcsweep.go:305 +0x151 fp=0xc0001f77c8 sp=0xc0001f7778 pc=0x5634f8aa1051
+runtime.gcenable.func1()
+	runtime/mgc.go:200 +0x25 fp=0xc0001f77e0 sp=0xc0001f77c8 pc=0x5634f8a95e85
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f77e8 sp=0xc0001f77e0 pc=0x5634f8ae8da1
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:200 +0x66
+
+goroutine 4 [GC scavenge wait]:
+runtime.gopark(0xc000220000?, 0x5634f91c98e0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:398 +0xce fp=0xc0001f7f70 sp=0xc0001f7f50 pc=0x5634f8ab7d8e
+runtime.goparkunlock(...)
+	runtime/proc.go:404
+runtime.(*scavengerState).park(0x5634f97bfa40)
+	runtime/mgcscavenge.go:425 +0x49 fp=0xc0001f7fa0 sp=0xc0001f7f70 pc=0x5634f8a9e609
+runtime.bgscavenge(0x0?)
+	runtime/mgcscavenge.go:658 +0x59 fp=0xc0001f7fc8 sp=0xc0001f7fa0 pc=0x5634f8a9ebd9
+runtime.gcenable.func2()
+	runtime/mgc.go:201 +0x25 fp=0xc0001f7fe0 sp=0xc0001f7fc8 pc=0x5634f8a95e25
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f7fe8 sp=0xc0001f7fe0 pc=0x5634f8ae8da1
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:201 +0xa5
+
+goroutine 18 [finalizer wait]:
+runtime.gopark(0x5634f933c180?, 0x1f8ab8f01?, 0x0?, 0x0?, 0x5634f8ac0005?)
+	runtime/proc.go:398 +0xce fp=0xc0001f6628 sp=0xc0001f6608 pc=0x5634f8ab7d8e
+runtime.runfinq()
+	runtime/mfinal.go:193 +0x107 fp=0xc0001f67e0 sp=0xc0001f6628 pc=0x5634f8a94e87
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f67e8 sp=0xc0001f67e0 pc=0x5634f8ae8da1
+created by runtime.createfing in goroutine 1
+	runtime/mfinal.go:163 +0x3d
+
+goroutine 5 [chan receive]:
+runtime.gopark(0xc00026ff10?, 0xc000224060?, 0xc8?, 0x3f?, 0xc00026fef8?)
+	runtime/proc.go:398 +0xce fp=0xc00024dea8 sp=0xc00024de88 pc=0x5634f8ab7d8e
+runtime.chanrecv(0xc00028f4a0, 0x0, 0x1)
+	runtime/chan.go:583 +0x3cd fp=0xc00024df20 sp=0xc00024dea8 pc=0x5634f8a8188d
+runtime.chanrecv1(0xc000014270?, 0x0?)
+	runtime/chan.go:442 +0x12 fp=0xc00024df48 sp=0xc00024df20 pc=0x5634f8a81492
+github.com/apptainer/apptainer/internal/pkg/util/mainthread.Execute(...)
+	github.com/apptainer/apptainer/internal/pkg/util/mainthread/mainthread.go:28
+main.startup()
+	./main_linux.go:72 +0x235 fp=0xc00024dfe0 sp=0xc00024df48 pc=0x5634f90beef5
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc00024dfe8 sp=0xc00024dfe0 pc=0x5634f8ae8da1
+created by main.main in goroutine 1
+	./main_linux.go:111 +0x1a
+
+goroutine 6 [runnable]:
+runtime.notetsleepg(0x7fa0559d6000?, 0x0?)
+	runtime/lock_futex.go:236 +0x29 fp=0xc0001f87a0 sp=0xc0001f8768 pc=0x5634f8a86fc9
+os/signal.signal_recv()
+	runtime/sigqueue.go:152 +0x29 fp=0xc0001f87c0 sp=0xc0001f87a0 pc=0x5634f8ae56c9
+os/signal.loop()
+	os/signal/signal_unix.go:23 +0x13 fp=0xc0001f87e0 sp=0xc0001f87c0 pc=0x5634f8be4293
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f87e8 sp=0xc0001f87e0 pc=0x5634f8ae8da1
+created by os/signal.Notify.func1.1 in goroutine 1
+	os/signal/signal.go:151 +0x1f
+
+goroutine 7 [select, locked to thread]:
+runtime.gopark(0xc0001f8fa8?, 0x2?, 0x29?, 0x80?, 0xc0001f8fa4?)
+	runtime/proc.go:398 +0xce fp=0xc0001f8e38 sp=0xc0001f8e18 pc=0x5634f8ab7d8e
+runtime.selectgo(0xc0001f8fa8, 0xc0001f8fa0, 0x0?, 0x0, 0x0?, 0x1)
+	runtime/select.go:327 +0x725 fp=0xc0001f8f58 sp=0xc0001f8e38 pc=0x5634f8ac7f45
+runtime.ensureSigM.func1()
+	runtime/signal_unix.go:1014 +0x1a5 fp=0xc0001f8fe0 sp=0xc0001f8f58 pc=0x5634f8adf945
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f8fe8 sp=0xc0001f8fe0 pc=0x5634f8ae8da1
+created by runtime.ensureSigM in goroutine 1
+	runtime/signal_unix.go:997 +0xc8
+
+goroutine 8 [GC worker (idle)]:
+runtime.gopark(0x7ba53aeebf06d?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:398 +0xce fp=0xc0001f9750 sp=0xc0001f9730 pc=0x5634f8ab7d8e
+runtime.gcBgMarkWorker()
+	runtime/mgc.go:1293 +0xe5 fp=0xc0001f97e0 sp=0xc0001f9750 pc=0x5634f8a97a45
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f97e8 sp=0xc0001f97e0 pc=0x5634f8ae8da1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	runtime/mgc.go:1217 +0x1c
+
+goroutine 9 [syscall]:
+syscall.Syscall6(0x0?, 0x0?, 0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	syscall/syscall_linux.go:91 +0x30 fp=0xc0001f9e08 sp=0xc0001f9d80 pc=0x5634f8b04d50
+os.(*Process).blockUntilWaitable(0xc00056e870)
+	os/wait_waitid.go:32 +0x76 fp=0xc0001f9ee0 sp=0xc0001f9e08 pc=0x5634f8b76516
+os.(*Process).wait(0xc00056e870)
+	os/exec_unix.go:22 +0x25 fp=0xc0001f9f40 sp=0xc0001f9ee0 pc=0x5634f8b6fae5
+os.(*Process).Wait(...)
+	os/exec.go:134
+os/exec.(*Cmd).Wait(0xc00040c160)
+	os/exec/exec.go:890 +0x45 fp=0xc0001f9fa8 sp=0xc0001f9f40 pc=0x5634f8db6ae5
+github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer.(*EngineOperations).StartProcess.func1()
+	github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer/process_linux.go:234 +0x25 fp=0xc0001f9fe0 sp=0xc0001f9fa8 pc=0x5634f90a4845
+runtime.goexit()
+	runtime/asm_amd64.s:1650 +0x1 fp=0xc0001f9fe8 sp=0xc0001f9fe0 pc=0x5634f8ae8da1
+created by github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer.(*EngineOperations).StartProcess in goroutine 1
+	github.com/apptainer/apptainer/internal/pkg/runtime/engine/apptainer/process_linux.go:233 +0x1585
+
+rax    0x0
+rbx    0x7fa05597ce90
+rcx    0x7fa0558367ac
+rdx    0x0
+rdi    0x1
+rsi    0x8
+rbp    0x7fa00ea0a6c0
+rsp    0x7fa00ea09920
+r8     0x0
+r9     0x1
+r10    0x8
+r11    0x246
+r12    0x7fa00ea09ba0
+r13    0x0
+r14    0xc0000069c0
+r15    0x10
+rip    0x7fa0557d254f
+rflags 0x10246
+cs     0x33
+fs     0x0
+gs     0x0

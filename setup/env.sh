@@ -14,17 +14,17 @@ NEXTFLOW_BIN="/home/flben/links/projects/rrg-jacquese/LAB_WORKSPACE/SOFTWARE/bio
 # After running bin/install.sh this becomes:
 #   <INSTALL_DIR>/<something>/workflow   (install.sh prints the exact path)
 # You already have a sandbox at .../cram_hbcc/3_8_1# in env.sh
-SAREK_DIR="/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-3.8.1-offline-v2/3_8_1"
+SAREK_DIR="/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-3.8.1-offline/3_8_1"
 
 # --- iGenomes / reference base (pre-downloaded, offline) --------------------
 IGENOMES_BASE="/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references"
 GENOME="GATK.GRCh38"
 
 # --- Variant callers to run -------------------------------------------------
-SAREK_TOOLS="strelka,haplotypecaller"
+SAREK_TOOLS="strelka,haplotypecaller,deepvariant,cnvkit,manta,indexcov,tiddit"
 
 # --- Container cache (shared across runs so images download only once) ------
-export NXF_SINGULARITY_CACHEDIR="/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline-v2/NXF_SINGULARITY_CACHEDIR"
+export NXF_SINGULARITY_CACHEDIR="/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/NXF_SINGULARITY_CACHEDIR"
 export NXF_APPTAINER_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"
 export APPTAINER_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"
 export SINGULARITY_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"

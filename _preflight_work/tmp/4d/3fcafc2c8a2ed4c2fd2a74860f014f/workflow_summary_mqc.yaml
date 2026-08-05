@@ -1,0 +1,83 @@
+id: 'nf-core-sarek-summary'
+description: ' - this information is collected when the pipeline is started.'
+section_name: 'nf-core/sarek Workflow Summary'
+section_href: 'https://github.com/nf-core/sarek'
+plot_type: 'html'
+data: |
+    <p style="font-size:110%"><b>Input/output options</b></p>
+    <dl class="dl-horizontal">
+        <dt>input</dt><dd><samp>sample.csv</samp></dd>
+        <dt>outdir</dt><dd><samp>/home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/_preflight_out</samp></dd>
+        <dt>step</dt><dd><samp>variant_calling</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Main options</b></p>
+    <dl class="dl-horizontal">
+        <dt>intervals</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/intervals/wgs_calling_regions_noseconds.hg38.bed</samp></dd>
+        <dt>tools</dt><dd><samp>strelka,haplotypecaller,deepvariant,cnvkit,manta,indexcov,tiddit</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Variant Calling</b></p>
+    <dl class="dl-horizontal">
+        <dt>cf_chrom_len</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/Length/Homo_sapiens_assembly38.len</samp></dd>
+        <dt>pon</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/1000g_pon.hg38.vcf.gz</samp></dd>
+        <dt>pon_tbi</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/1000g_pon.hg38.vcf.gz.tbi</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>General reference genome options</b></p>
+    <dl class="dl-horizontal">
+        <dt>igenomes_base</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Reference genome options</b></p>
+    <dl class="dl-horizontal">
+        <dt>ascat_alleles</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/ASCAT/G1000_alleles_hg38.zip</samp></dd>
+        <dt>ascat_genome</dt><dd><samp>hg38</samp></dd>
+        <dt>ascat_loci</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/ASCAT/G1000_loci_hg38.zip</samp></dd>
+        <dt>ascat_loci_gc</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/ASCAT/GC_G1000_hg38.zip</samp></dd>
+        <dt>ascat_loci_rt</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/ASCAT/RT_G1000_hg38.zip</samp></dd>
+        <dt>bwa</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/BWAIndex/</samp></dd>
+        <dt>bwamem2</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/BWAmem2Index/</samp></dd>
+        <dt>chr_dir</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/Chromosomes</samp></dd>
+        <dt>dbsnp</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/dbsnp_146.hg38.vcf.gz</samp></dd>
+        <dt>dbsnp_tbi</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/dbsnp_146.hg38.vcf.gz.tbi</samp></dd>
+        <dt>dbsnp_vqsr</dt><dd><samp>--resource:dbsnp,known=false,training=true,truth=false,prior=2.0 dbsnp_146.hg38.vcf.gz</samp></dd>
+        <dt>dict</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/WholeGenomeFasta/Homo_sapiens_assembly38.dict</samp></dd>
+        <dt>dragmap</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/dragmap/</samp></dd>
+        <dt>fasta</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/WholeGenomeFasta/Homo_sapiens_assembly38.fasta</samp></dd>
+        <dt>fasta_fai</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Sequence/WholeGenomeFasta/Homo_sapiens_assembly38.fasta.fai</samp></dd>
+        <dt>germline_resource</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/af-only-gnomad.hg38.vcf.gz</samp></dd>
+        <dt>germline_resource_tbi</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/af-only-gnomad.hg38.vcf.gz.tbi</samp></dd>
+        <dt>known_indels</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/{Mills_and_1000G_gold_standard.indels.hg38,beta/Homo_sapiens_assembly38.known_indels}.vcf.gz</samp></dd>
+        <dt>known_indels_tbi</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/{Mills_and_1000G_gold_standard.indels.hg38,beta/Homo_sapiens_assembly38.known_indels}.vcf.gz.tbi</samp></dd>
+        <dt>known_indels_vqsr</dt><dd><samp>--resource:gatk,known=false,training=true,truth=true,prior=10.0 Homo_sapiens_assembly38.known_indels.vcf.gz --resource:mills,known=false,training=true,truth=true,prior=10.0 Mills_and_1000G_gold_standard.indels.hg38.vcf.gz</samp></dd>
+        <dt>known_snps</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/1000G_omni2.5.hg38.vcf.gz</samp></dd>
+        <dt>known_snps_tbi</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/GATKBundle/1000G_omni2.5.hg38.vcf.gz.tbi</samp></dd>
+        <dt>known_snps_vqsr</dt><dd><samp>--resource:1000G,known=false,training=true,truth=true,prior=10.0 1000G_omni2.5.hg38.vcf.gz</samp></dd>
+        <dt>mappability</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/Control-FREEC/out100m2_hg38.gem</samp></dd>
+        <dt>msisensor2_models</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/MSIsensor2/models_hg38//</samp></dd>
+        <dt>msisensorpro_scan</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/MSIsensorPro/Homo_sapiens_assembly38.msisensor_scan.list</samp></dd>
+        <dt>ngscheckmate_bed</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/NGSCheckMate/SNP_GRCh38_hg38_wChr.bed</samp></dd>
+        <dt>sentieon_dnascope_model</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-resource-offline/references/Homo_sapiens/GATK/GRCh38/Annotation/Sentieon/SentieonDNAscopeModel1.1.model</samp></dd>
+        <dt>snpeff_cache</dt><dd><samp>NULL</samp></dd>
+        <dt>snpeff_db</dt><dd><samp>GRCh38.99</samp></dd>
+        <dt>vep_cache</dt><dd><samp>NULL</samp></dd>
+        <dt>vep_cache_version</dt><dd><samp>115</samp></dd>
+        <dt>vep_genome</dt><dd><samp>GRCh38</samp></dd>
+        <dt>vep_species</dt><dd><samp>homo_sapiens</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Institutional config options</b></p>
+    <dl class="dl-horizontal">
+        <dt>custom_config_base</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-3.8.1-offline/3_8_1/../configs/</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Generic options</b></p>
+    <dl class="dl-horizontal">
+        <dt>trace_report_suffix</dt><dd><samp>2026-08-05_12-14-46</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Core Nextflow options</b></p>
+    <dl class="dl-horizontal">
+        <dt>configFiles</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-3.8.1-offline/3_8_1/nextflow.config, /home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/setup/sarek.config, /tmp/preflight_78Oy.config</samp></dd>
+        <dt>containerEngine</dt><dd><samp>apptainer</samp></dd>
+        <dt>launchDir</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants</samp></dd>
+        <dt>profile</dt><dd><samp>apptainer</samp></dd>
+        <dt>projectDir</dt><dd><samp>/lustre09/project/6008022/flben/SAREK-CNV-ShortVariants/sarek-3.8.1-offline/3_8_1</samp></dd>
+        <dt>runName</dt><dd><samp>fervent_watson</samp></dd>
+        <dt>userName</dt><dd><samp>flben</samp></dd>
+        <dt>workDir</dt><dd><samp>/home/flben/links/projects/rrg-jacquese/flben/SAREK-CNV-ShortVariants/_preflight_work</samp></dd>
+    </dl>

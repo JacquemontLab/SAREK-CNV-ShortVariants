@@ -54,15 +54,28 @@ echo "=============================================="
 module load apptainer 2>/dev/null || true
 
 # --- Restrict the environment so the login node doesn't kill us -------------
-# THE key fix: apptainer's Go image-builder sets GOMAXPROCS=nproc and spawns
-# ~1 thread per core to unpack OCI layers; on a 64-core login node that blows
-# the per-user process cap -> pthread_create EAGAIN / SIGABRT during pull.
 export GOMAXPROCS=2
+
+# Apptainer image build/runtime thread limits
+export APPTAINER_BUILD_NPROC=2
+export APPTAINER_PULLFUSE=0
+export APPTAINER_MKSQUASHFS_OPTIONS="-processors 1"
+export APPTAINER_SQUASHFS_ARGS="-processors 1"
+export APPTAINER_NO_FUSE=1
+export APPTAINER_SIF_FUSE=0
+export APPTAINERENV_OPENBLAS_NUM_THREADS=1
+export APPTAINERENV_OMP_NUM_THREADS=1
+export APPTAINERENV_MKL_NUM_THREADS=1
+export APPTAINERENV_NUMEXPR_NUM_THREADS=1
+# Scientific Python/OpenBLAS thread limits
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
 export OMP_NUM_THREADS=1
-# Also cap the Nextflow driver JVM: few GC/JIT threads (else it makes ~1 per
-# core on a big login node) and a small heap.
+
+# Nextflow JVM limits
 export NXF_OPTS="-XX:ActiveProcessorCount=2 -XX:+UseSerialGC -Xms256m -Xmx1500m"
-# Don't let Nextflow's own singularity puller run many pulls in parallel.
+
 export NXF_SINGULARITY_CACHEDIR
 # A tiny throwaway config that forces near-serial local execution during the
 #    stub run (stubs are trivial, so serial is fine and keeps thread count low).
