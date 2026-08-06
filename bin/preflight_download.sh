@@ -55,27 +55,27 @@ echo "=============================================="
 module load apptainer 2>/dev/null || true
 
 # --- Restrict the environment so the login node doesn't kill us -------------
-export GOMAXPROCS=2
+# export GOMAXPROCS=2
 
-# Apptainer image build/runtime thread limits
-export APPTAINER_BUILD_NPROC=2
-export APPTAINER_PULLFUSE=0
-export APPTAINER_MKSQUASHFS_OPTIONS="-processors 1"
-export APPTAINER_SQUASHFS_ARGS="-processors 1"
-export APPTAINER_NO_FUSE=1
-export APPTAINER_SIF_FUSE=0
-export APPTAINERENV_OPENBLAS_NUM_THREADS=1
-export APPTAINERENV_OMP_NUM_THREADS=1
-export APPTAINERENV_MKL_NUM_THREADS=1
-export APPTAINERENV_NUMEXPR_NUM_THREADS=1
-# Scientific Python/OpenBLAS thread limits
-export OPENBLAS_NUM_THREADS=1
-export MKL_NUM_THREADS=1
-export NUMEXPR_NUM_THREADS=1
-export OMP_NUM_THREADS=1
+# # Apptainer image build/runtime thread limits
+# export APPTAINER_BUILD_NPROC=2
+# export APPTAINER_PULLFUSE=0
+# export APPTAINER_MKSQUASHFS_OPTIONS="-processors 1"
+# export APPTAINER_SQUASHFS_ARGS="-processors 1"
+# export APPTAINER_NO_FUSE=1
+# export APPTAINER_SIF_FUSE=0
+# export APPTAINERENV_OPENBLAS_NUM_THREADS=1
+# export APPTAINERENV_OMP_NUM_THREADS=1
+# export APPTAINERENV_MKL_NUM_THREADS=1
+# export APPTAINERENV_NUMEXPR_NUM_THREADS=1
+# # Scientific Python/OpenBLAS thread limits
+# export OPENBLAS_NUM_THREADS=1
+# export MKL_NUM_THREADS=1
+# export NUMEXPR_NUM_THREADS=1
+# export OMP_NUM_THREADS=1
 
-# Nextflow JVM limits
-export NXF_OPTS="-XX:ActiveProcessorCount=2 -XX:+UseSerialGC -Xms256m -Xmx1500m"
+# # Nextflow JVM limits
+# export NXF_OPTS="-XX:ActiveProcessorCount=2 -XX:+UseSerialGC -Xms256m -Xmx1500m"
 
 export NXF_SINGULARITY_CACHEDIR
 # A tiny throwaway config that forces near-serial local execution during the
@@ -90,7 +90,7 @@ process {
     // memory so Nextflow's local-executor preflight check doesn't reject
     // a task for "exceeding available memory" before it ever runs.
     resourceLimits = [
-        cpus:   4,
+        cpus:   8,
         memory: '8.GB',
         time:   '2.h'
     ]
@@ -98,7 +98,7 @@ process {
 executor {
     name        = 'local'
     queueSize   = 2
-    cpus        = 4
+    cpus        = 8
 }
 singularity {
     pullTimeout = '2h'

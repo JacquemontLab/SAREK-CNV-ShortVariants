@@ -8,7 +8,7 @@
 SAREK_VERSION="3.8.1"
 
 # --- Nextflow binary (pinned version recommended for reproducibility) -------
-NEXTFLOW_BIN="~/links/projects/rrg-jacquese/LAB_WORKSPACE/SOFTWARE/bioutils/bin/nextflow-25.10.2-dist"
+NEXTFLOW_BIN="/home/flben/work_projects/bioutils/bin/nextflow-25.10.2-dist"
 
 # --- Local clone / offline copy of the nf-core/sarek pipeline code ----------
 # After running bin/install.sh this becomes:

@@ -71,14 +71,6 @@ echo "=============================================="
 
 mkdir -p "$NXF_SINGULARITY_CACHEDIR" "$IGENOMES_DEST" "$APPTAINER_TMPDIR"
 
-# ---------------------------------------------------------------------------
-# Login-node safety: apptainer's Go image-builder defaults GOMAXPROCS to the
-# core count and spawns ~1 thread/core to unpack OCI layers, which can exhaust
-# the login node's per-user process cap (pthread_create EAGAIN / SIGABRT).
-# Cap it so container pulls survive.
-# ---------------------------------------------------------------------------
-export GOMAXPROCS=2
-export OMP_NUM_THREADS=1
 
 # ---------------------------------------------------------------------------
 # 0 + 1. Tooling + pipeline/container download.
