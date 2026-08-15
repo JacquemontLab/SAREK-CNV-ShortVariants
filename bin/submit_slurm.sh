@@ -2,9 +2,9 @@
 #SBATCH --job-name=sarek_cram_vc
 #SBATCH --mail-type=END,FAIL
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=64
-#SBATCH --mem-per-cpu=4000MB
-#SBATCH --time=24:00:00
+#SBATCH --cpus-per-task=192
+#SBATCH --mem-per-cpu=3500MB
+#SBATCH --time=48:00:00
 #SBATCH --output=sarek_cram_vc_%j.log
 #SBATCH --account=rrg-jacquese
 # ---------------------------------------------------------------------------
@@ -15,11 +15,11 @@
 # the internet.
 #
 # Usage:
-#   sbatch submit_slurm.sh <SAMPLESHEET_CSV> <OUTPUT_DIR>
+#   sbatch submit_slurm.sh <SAMPLESHEET_CSV> <OUTPUT_DIR> <GIT_DIR>
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+HERE=$3
 # Resolve env.sh at repo root, or fall back to setup/ (current layout).
 if   [[ -f "${HERE}/env.sh" ]];       then ENV_FILE="${HERE}/env.sh"
 elif [[ -f "${HERE}/setup/env.sh" ]]; then ENV_FILE="${HERE}/setup/env.sh"
